@@ -22,7 +22,7 @@ Early development
 - Clean, maintainable codebase
 
 ## Current Features
--TBA
+-Game board prints
 
 ## Technologies
 
