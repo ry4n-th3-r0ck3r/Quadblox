@@ -1,4 +1,4 @@
-# QuadBlox
+# QuadBlox (In Progress...)
 
 QuadBlox is a falling block puzzle game written in Python using Pygame.
 
@@ -23,6 +23,7 @@ Early development
 
 ## Current Features
 -Game board prints
+-New game pieces are defined
 
 ## Technologies
 

@@ -2,6 +2,8 @@ import sys
 import pygame
 
 from board import Board
+from block import Block
+from piece import Piece
 
 # Initialize Pygame
 pygame.init()
@@ -24,7 +26,8 @@ FPS = 60
 
 # Create the game board
 board = Board()
-
+piece = Piece("square")
+block = Block(1, 1, (0, 100, 255))
 running = True
 
 while running:
@@ -38,6 +41,9 @@ while running:
     screen.fill((0, 0, 0))
 
     board.draw(screen)
+
+    block.draw(screen)
+    piece.draw(screen)
 
     pygame.display.flip()
 
