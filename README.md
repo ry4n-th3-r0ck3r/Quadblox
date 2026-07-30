@@ -23,7 +23,7 @@ Early development
 
 ## Current Features
 -Game board prints
--New game pieces are defined
+-All game pieces are defined
 
 ## Technologies
 
@@ -33,4 +33,8 @@ Early development
 
 ---
 
-Working title: **QuadBlox**
+NOTES: 
+-Defined all existing game pieces in memory. 
+-Adjusted settings variables for smoother coding. 
+-Updated README
+

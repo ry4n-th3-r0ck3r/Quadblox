@@ -26,8 +26,7 @@ FPS = 60
 
 # Create the game board
 board = Board()
-piece = Piece("square")
-block = Block(1, 1, (0, 100, 255))
+piece = Piece("z")
 running = True
 
 while running:
@@ -42,7 +41,6 @@ while running:
 
     board.draw(screen)
 
-    block.draw(screen)
     piece.draw(screen)
 
     pygame.display.flip()

@@ -1,9 +1,13 @@
 from block import Block
+from settings import *
 
 
 class Piece:
 
     def __init__(self, shape):
+
+        self.x = SPAWN_X
+        self.y = SPAWN_Y
 
         self.name = shape
         self.blocks = []
@@ -31,12 +35,8 @@ class Piece:
 
 
     def square(self):
-
-        RED = (220, 60, 60)
-
-#This lets you specify starting location of the piece.
-        x = 4
-        y = 1
+        x = self.x
+        y = self.y
 
         self.blocks = [
             Block(x, y, RED),
@@ -47,27 +47,77 @@ class Piece:
 
 
     def line(self):
-        pass
+
+    # This lets you specify starting location of the piece.
+        x = self.x
+        y = self.y
+
+        self.blocks = [
+            Block(x, y, BLUE),
+            Block(x + 1, y, BLUE),
+            Block(x + 2, y, BLUE),
+            Block(x + 3, y, BLUE)
+        ]
 
 
     def l_piece(self):
-        pass
+        x = self.x
+        y = self.y
+
+        self.blocks = [
+            Block(x, y, GREEN),
+            Block(x, y + 1, GREEN),
+            Block(x, y + 2, GREEN),
+            Block(x + 1, y + 2, GREEN)
+        ]
 
 
     def j_piece(self):
-        pass
+        x = self.x
+        y = self.y
+
+        self.blocks = [
+            Block(x + 1, y, CYAN),
+            Block(x + 1, y + 1, CYAN),
+            Block(x + 1, y + 2, CYAN),
+            Block(x, y + 2, CYAN)
+        ]
 
 
     def t_piece(self):
-        pass
+        x = self.x
+        y = self.y
+
+        self.blocks = [
+            Block(x, y, YELLOW),
+            Block(x + 1, y, YELLOW),
+            Block(x + 2, y, YELLOW),
+            Block(x + 1, y + 1, YELLOW)
+        ]
 
 
     def s_piece(self):
-        pass
+        x = self.x
+        y = self.y
+
+        self.blocks = [
+            Block(x + 1, y, ORANGE),
+            Block(x + 2, y, ORANGE),
+            Block(x, y + 1, ORANGE),
+            Block(x + 1, y + 1, ORANGE)
+        ]
 
 
     def z_piece(self):
-        pass
+        x = self.x
+        y = self.y
+
+        self.blocks = [
+            Block(x, y, ORANGE),
+            Block(x + 1, y, ORANGE),
+            Block(x + 1, y + 1, ORANGE),
+            Block(x + 2, y + 1, ORANGE)
+        ]
 
 
     def draw(self, screen):
