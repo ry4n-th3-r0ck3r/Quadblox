@@ -31,10 +31,11 @@ Early development
 - Pygame
 - PyCharm
 
----
+## NOTES: 
 
-NOTES: 
--Defined all existing game pieces in memory. 
--Adjusted settings variables for smoother coding. 
--Updated README
+- Defined all existing game pieces in memory. 
+- Adjusted settings variables for smoother coding. 
+- Updated README
+
+---
 
