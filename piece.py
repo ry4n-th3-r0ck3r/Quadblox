@@ -1,5 +1,6 @@
 from block import Block
 from settings import *
+import random
 
 
 class Piece:
@@ -77,10 +78,10 @@ class Piece:
         y = self.y
 
         self.blocks = [
-            Block(x + 1, y, CYAN),
-            Block(x + 1, y + 1, CYAN),
-            Block(x + 1, y + 2, CYAN),
-            Block(x, y + 2, CYAN)
+            Block(x + 1, y, INDIGO),
+            Block(x + 1, y + 1, INDIGO),
+            Block(x + 1, y + 2, INDIGO),
+            Block(x, y + 2, INDIGO)
         ]
 
 
@@ -113,10 +114,10 @@ class Piece:
         y = self.y
 
         self.blocks = [
-            Block(x, y, ORANGE),
-            Block(x + 1, y, ORANGE),
-            Block(x + 1, y + 1, ORANGE),
-            Block(x + 2, y + 1, ORANGE)
+            Block(x, y, VIOLET),
+            Block(x + 1, y, VIOLET),
+            Block(x + 1, y + 1, VIOLET),
+            Block(x + 2, y + 1, VIOLET)
         ]
 
 
@@ -124,3 +125,19 @@ class Piece:
 
         for block in self.blocks:
             block.draw(screen)
+
+def spawn_piece():
+
+    shapes = [
+        "square",
+        "line",
+        "l",
+        "j",
+        "t",
+        "s",
+        "z"
+    ]
+
+    shape = random.choice(shapes)
+
+    return Piece(shape)

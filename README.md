@@ -35,6 +35,8 @@ Early development
 
 - Defined all existing game pieces in memory. 
 - Adjusted settings variables for smoother coding. 
+- Created spawn function for pieces.
+- Adjusted coloring to match rainbow colors. 7 pieces for 7 colors.
 - Updated README
 
 ---

@@ -3,7 +3,8 @@ import pygame
 
 from board import Board
 from block import Block
-from piece import Piece
+from piece import *
+
 
 # Initialize Pygame
 pygame.init()
@@ -26,7 +27,7 @@ FPS = 60
 
 # Create the game board
 board = Board()
-piece = Piece("z")
+piece = spawn_piece()
 running = True
 
 while running:
