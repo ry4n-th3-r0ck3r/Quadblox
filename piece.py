@@ -34,6 +34,11 @@ class Piece:
         elif shape == "z":
             self.z_piece()
 
+#Lets the piece move downward. Simply increases y value to create downward movement.
+    def move_down(self):
+
+        for block in self.blocks:
+            block.y += 1
 
     def square(self):
         x = self.x
@@ -120,6 +125,14 @@ class Piece:
             Block(x + 2, y + 1, VIOLET)
         ]
 
+#This is a piece that needs testing before full implementation.
+    def y_piece(self):
+        self.blocks = [
+            Block(self.x, self.y, CYAN),
+            Block(self.x + 2, self.y, CYAN),
+            Block(self.x + 1, self.y + 1, CYAN),
+            Block(self.x + 1, self.y + 2, CYAN)
+        ]
 
     def draw(self, screen):
 

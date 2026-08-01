@@ -3,6 +3,7 @@ BLOCK_SIZE = 32
 PLAY_WIDTH = 8
 PLAY_HEIGHT = 16
 
+#Primary Block Colors
 RED = (220, 60, 60)
 ORANGE = (255, 140, 0)
 YELLOW = (255, 220, 0)
@@ -10,6 +11,8 @@ GREEN = (60, 200, 80)
 BLUE = (50, 120, 255)
 INDIGO = (75, 0, 130)
 VIOLET = (170, 80, 255)
+
+#Other colors.
 CYAN = (0, 220, 220)
 
 BORDER = 1

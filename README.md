@@ -37,6 +37,9 @@ Early development
 - Adjusted settings variables for smoother coding. 
 - Created spawn function for pieces.
 - Adjusted coloring to match rainbow colors. 7 pieces for 7 colors.
+- Added new experimental 'Y' piece for testing once development is done.
+- Added function to let pieces fall.
+- Removed some redundant code.
 - Updated README
 
 ---

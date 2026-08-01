@@ -24,10 +24,15 @@ pygame.display.set_caption(WINDOW_TITLE)
 # Control frame rate
 clock = pygame.time.Clock()
 FPS = 60
+fall_delay = 500      # milliseconds
+last_fall = pygame.time.get_ticks()
 
 # Create the game board
 board = Board()
+
+#Creates a random piece to start the game.
 piece = spawn_piece()
+
 running = True
 
 while running:
@@ -37,14 +42,17 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
+    current_time = pygame.time.get_ticks()
+
+    if current_time - last_fall > fall_delay:
+        piece.move_down()
+        last_fall = current_time
     # Draw
     screen.fill((0, 0, 0))
 
     board.draw(screen)
 
     piece.draw(screen)
-
-    pygame.display.flip()
 
     # Update display
     pygame.display.flip()
