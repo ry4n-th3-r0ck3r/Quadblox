@@ -40,6 +40,17 @@ class Piece:
         for block in self.blocks:
             block.y += 1
 
+#Tests if piece CAN move downard.
+    def can_move_down(self, board):
+
+        for block in self.blocks:
+            next_y = block.y + 1
+
+            if board.is_occupied(block.x, next_y):
+                return False
+
+        return True
+
     def square(self):
         x = self.x
         y = self.y
@@ -138,6 +149,7 @@ class Piece:
 
         for block in self.blocks:
             block.draw(screen)
+
 
 def spawn_piece():
 

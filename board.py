@@ -52,7 +52,22 @@ class Board:
 
                 if self.grid[row][column] == "B":
                     pygame.draw.rect(screen, BORDER_COLOR, rect)
+
+
+                elif self.grid[row][column] is not None:
+                    pygame.draw.rect(screen, self.grid[row][column], rect)
+
                 else:
                     pygame.draw.rect(screen, BOARD_COLOR, rect)
 
                 pygame.draw.rect(screen, GRID_COLOR, rect, 1)
+
+    #Checks if grid cell is occupied
+    def is_occupied(self, x, y):
+        return self.grid[y][x] is not None
+
+    #Locks piece into the board.
+    def lock_piece(self, piece):
+
+        for block in piece.blocks:
+            self.grid[block.y][block.x] = block.color

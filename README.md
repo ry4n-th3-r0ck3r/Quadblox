@@ -40,6 +40,7 @@ Early development
 - Added new experimental 'Y' piece for testing once development is done.
 - Added function to let pieces fall.
 - Removed some redundant code.
+- Implemented basic piece collision and board locking.
 - Updated README
 
 ---

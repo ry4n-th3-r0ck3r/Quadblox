@@ -45,7 +45,12 @@ while running:
     current_time = pygame.time.get_ticks()
 
     if current_time - last_fall > fall_delay:
-        piece.move_down()
+        if piece.can_move_down(board):
+            piece.move_down()
+        else:
+            board.lock_piece(piece)
+            piece = spawn_piece()
+
         last_fall = current_time
     # Draw
     screen.fill((0, 0, 0))
