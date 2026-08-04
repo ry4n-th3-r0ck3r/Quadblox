@@ -15,6 +15,12 @@ VIOLET = (170, 80, 255)
 #Other colors.
 CYAN = (0, 220, 220)
 
+#Gameboard colors
+
+BORDER_COLOR = (120, 120, 120)
+BOARD_COLOR = (20, 20, 20)
+GRID_COLOR = (50, 50, 50)
+
 BORDER = 1
 
 #Starting location of pieces

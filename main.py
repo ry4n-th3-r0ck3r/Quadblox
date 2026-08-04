@@ -39,8 +39,25 @@ while running:
 
     # Handle events
     for event in pygame.event.get():
+
         if event.type == pygame.QUIT:
             running = False
+
+        elif event.type == pygame.KEYDOWN:
+
+            if event.key == pygame.K_LEFT:
+
+                if piece.can_move_left(board):
+                    piece.move_left()
+
+            elif event.key == pygame.K_RIGHT:
+
+                if piece.can_move_right(board):
+                    piece.move_right()
+
+            elif event.key == pygame.K_UP:
+
+                piece.rotate()
 
     current_time = pygame.time.get_ticks()
 
@@ -52,6 +69,8 @@ while running:
             piece = spawn_piece()
 
         last_fall = current_time
+
+
     # Draw
     screen.fill((0, 0, 0))
 

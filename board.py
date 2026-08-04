@@ -1,11 +1,6 @@
 import pygame
 from settings import *
 
-BORDER_COLOR = (120, 120, 120)
-BOARD_COLOR = (20, 20, 20)
-GRID_COLOR = (50, 50, 50)
-
-
 class Board:
 
     def __init__(self):

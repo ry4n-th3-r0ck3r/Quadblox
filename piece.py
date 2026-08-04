@@ -13,26 +13,61 @@ class Piece:
         self.name = shape
         self.blocks = []
 
+        self.rotation = 0
+
         if shape == "square":
+            self.max_rotation = 0
             self.square()
 
         elif shape == "line":
+            self.max_rotation = 1
             self.line()
 
         elif shape == "l":
+            self.max_rotation = 3
             self.l_piece()
 
         elif shape == "j":
+            self.max_rotation = 3
             self.j_piece()
 
         elif shape == "t":
+            self.max_rotation = 3
             self.t_piece()
 
         elif shape == "s":
+            self.max_rotation = 1
             self.s_piece()
 
         elif shape == "z":
+            self.max_rotation = 1
             self.z_piece()
+
+#Draws the new shape with the requested rotation.
+
+    def rebuild(self):
+
+        if self.name == "square":
+            self.square()
+
+        elif self.name == "line":
+            self.line()
+
+        elif self.name == "l":
+            self.l_piece()
+
+        elif self.name == "j":
+            self.j_piece()
+
+        elif self.name == "t":
+            self.t_piece()
+
+        elif self.name == "s":
+            self.s_piece()
+
+        elif self.name == "z":
+            self.z_piece()
+
 
 #Lets the piece move downward. Simply increases y value to create downward movement.
     def move_down(self):
@@ -43,6 +78,8 @@ class Piece:
 #Tests if piece CAN move downard.
     def can_move_down(self, board):
 
+        self.y += 1
+
         for block in self.blocks:
             next_y = block.y + 1
 
@@ -51,6 +88,57 @@ class Piece:
 
         return True
 
+#Moves piece to the left.
+    def move_left(self):
+
+        self.x -= 1
+
+        for block in self.blocks:
+            block.x -= 1
+
+#Checks to make sure piece CAN move to the left
+    def can_move_left(self, board):
+
+        for block in self.blocks:
+
+            next_x = block.x - 1
+
+            if board.is_occupied(next_x, block.y):
+                return False
+
+        return True
+
+#Moves piece to the right.
+    def move_right(self):
+
+        self.x += 1
+
+        for block in self.blocks:
+            block.x += 1
+#Checks to make sure piece CAN move to the right
+    def can_move_right(self, board):
+
+        for block in self.blocks:
+
+            next_x = block.x + 1
+
+            if board.is_occupied(next_x, block.y):
+                return False
+
+        return True
+
+#Allows piece rotation.
+    def rotate(self):
+
+        self.rotation += 1
+
+        if self.rotation > self.max_rotation:
+            self.rotation = 0
+
+        self.rebuild()
+
+
+### Shape definitions
     def square(self):
         x = self.x
         y = self.y
@@ -69,81 +157,232 @@ class Piece:
         x = self.x
         y = self.y
 
-        self.blocks = [
-            Block(x, y, BLUE),
-            Block(x + 1, y, BLUE),
-            Block(x + 2, y, BLUE),
-            Block(x + 3, y, BLUE)
-        ]
+        if self.rotation == 0:
+            self.blocks = [
+                Block(x, y, BLUE),
+                Block(x + 1, y, BLUE),
+                Block(x + 2, y, BLUE),
+                Block(x + 3, y, BLUE)
+            ]
 
+        elif self.rotation == 1:
+
+            self.blocks = [
+                Block(x, y, BLUE),
+                Block(x, y + 1, BLUE),
+                Block(x, y + 2, BLUE),
+                Block(x, y + 3, BLUE)
+            ]
 
     def l_piece(self):
+
         x = self.x
         y = self.y
 
-        self.blocks = [
-            Block(x, y, GREEN),
-            Block(x, y + 1, GREEN),
-            Block(x, y + 2, GREEN),
-            Block(x + 1, y + 2, GREEN)
-        ]
+        if self.rotation == 0:
 
+            self.blocks = [
+                Block(x, y, GREEN),
+                Block(x, y + 1, GREEN),
+                Block(x, y + 2, GREEN),
+                Block(x + 1, y + 2, GREEN)
+            ]
+
+        elif self.rotation == 1:
+
+            self.blocks = [
+                Block(x, y, GREEN),
+                Block(x + 1, y, GREEN),
+                Block(x + 2, y, GREEN),
+                Block(x, y + 1, GREEN)
+            ]
+
+        elif self.rotation == 2:
+
+            self.blocks = [
+                Block(x, y, GREEN),
+                Block(x + 1, y, GREEN),
+                Block(x + 1, y + 1, GREEN),
+                Block(x + 1, y + 2, GREEN)
+            ]
+
+        elif self.rotation == 3:
+
+            self.blocks = [
+                Block(x + 2, y, GREEN),
+                Block(x, y + 1, GREEN),
+                Block(x + 1, y + 1, GREEN),
+                Block(x + 2, y + 1, GREEN)
+            ]
 
     def j_piece(self):
+
         x = self.x
         y = self.y
 
-        self.blocks = [
-            Block(x + 1, y, INDIGO),
-            Block(x + 1, y + 1, INDIGO),
-            Block(x + 1, y + 2, INDIGO),
-            Block(x, y + 2, INDIGO)
-        ]
+        if self.rotation == 0:
+            self.blocks = [
+                Block(x + 1, y, INDIGO),
+                Block(x + 1, y + 1, INDIGO),
+                Block(x + 1, y + 2, INDIGO),
+                Block(x, y + 2, INDIGO)
+            ]
 
+        elif self.rotation == 1:
+
+            self.blocks = [
+                Block(x, y, INDIGO),
+                Block(x, y + 1, INDIGO),
+                Block(x + 1, y + 1, INDIGO),
+                Block(x + 2, y + 1, INDIGO)
+            ]
+
+        elif self.rotation == 2:
+
+            self.blocks = [
+                Block(x, y, INDIGO),
+                Block(x + 1, y, INDIGO),
+                Block(x, y + 1, INDIGO),
+                Block(x, y + 2, INDIGO)
+            ]
+
+        elif self.rotation == 3:
+
+            self.blocks = [
+                Block(x, y, INDIGO),
+                Block(x + 1, y, INDIGO),
+                Block(x + 2, y, INDIGO),
+                Block(x + 2, y + 1, INDIGO)
+            ]
 
     def t_piece(self):
+
         x = self.x
         y = self.y
 
-        self.blocks = [
-            Block(x, y, YELLOW),
-            Block(x + 1, y, YELLOW),
-            Block(x + 2, y, YELLOW),
-            Block(x + 1, y + 1, YELLOW)
-        ]
+        if self.rotation == 0:
 
+            self.blocks = [
+                Block(x, y, YELLOW),
+                Block(x + 1, y, YELLOW),
+                Block(x + 2, y, YELLOW),
+                Block(x + 1, y + 1, YELLOW)
+            ]
+
+        elif self.rotation == 1:
+
+            self.blocks = [
+                Block(x, y, YELLOW),
+                Block(x, y + 1, YELLOW),
+                Block(x, y + 2, YELLOW),
+                Block(x + 1, y + 1, YELLOW)
+            ]
+
+        elif self.rotation == 2:
+
+            self.blocks = [
+                Block(x + 1, y, YELLOW),
+                Block(x, y + 1, YELLOW),
+                Block(x + 1, y + 1, YELLOW),
+                Block(x + 2, y + 1, YELLOW)
+            ]
+
+        elif self.rotation == 3:
+
+            self.blocks = [
+                Block(x + 1, y, YELLOW),
+                Block(x, y + 1, YELLOW),
+                Block(x + 1, y + 1, YELLOW),
+                Block(x + 1, y + 2, YELLOW)
+            ]
 
     def s_piece(self):
+
         x = self.x
         y = self.y
 
-        self.blocks = [
-            Block(x + 1, y, ORANGE),
-            Block(x + 2, y, ORANGE),
-            Block(x, y + 1, ORANGE),
-            Block(x + 1, y + 1, ORANGE)
-        ]
+        if self.rotation == 0:
 
+            self.blocks = [
+                Block(x + 1, y, ORANGE),
+                Block(x + 2, y, ORANGE),
+                Block(x, y + 1, ORANGE),
+                Block(x + 1, y + 1, ORANGE)
+            ]
+
+        elif self.rotation == 1:
+
+            self.blocks = [
+                Block(x, y, ORANGE),
+                Block(x, y + 1, ORANGE),
+                Block(x + 1, y + 1, ORANGE),
+                Block(x + 1, y + 2, ORANGE)
+            ]
 
     def z_piece(self):
+
         x = self.x
         y = self.y
 
-        self.blocks = [
-            Block(x, y, VIOLET),
-            Block(x + 1, y, VIOLET),
-            Block(x + 1, y + 1, VIOLET),
-            Block(x + 2, y + 1, VIOLET)
-        ]
+        if self.rotation == 0:
+
+            self.blocks = [
+                Block(x, y, VIOLET),
+                Block(x + 1, y, VIOLET),
+                Block(x + 1, y + 1, VIOLET),
+                Block(x + 2, y + 1, VIOLET)
+            ]
+
+        elif self.rotation == 1:
+
+            self.blocks = [
+                Block(x + 1, y, VIOLET),
+                Block(x, y + 1, VIOLET),
+                Block(x + 1, y + 1, VIOLET),
+                Block(x, y + 2, VIOLET)
+            ]
 
 #This is a piece that needs testing before full implementation.
     def y_piece(self):
-        self.blocks = [
-            Block(self.x, self.y, CYAN),
-            Block(self.x + 2, self.y, CYAN),
-            Block(self.x + 1, self.y + 1, CYAN),
-            Block(self.x + 1, self.y + 2, CYAN)
-        ]
+
+        x = self.x
+        y = self.y
+
+        if self.rotation == 0:
+
+            self.blocks = [
+                Block(x, y, CYAN),
+                Block(x + 2, y, CYAN),
+                Block(x + 1, y + 1, CYAN),
+                Block(x + 1, y + 2, CYAN)
+            ]
+
+        elif self.rotation == 1:
+
+            self.blocks = [
+                Block(x + 2, y, CYAN),
+                Block(x, y + 1, CYAN),
+                Block(x + 1, y + 1, CYAN),
+                Block(x + 2, y + 2, CYAN)
+            ]
+
+        elif self.rotation == 2:
+
+            self.blocks = [
+                Block(x + 1, y, CYAN),
+                Block(x + 1, y + 1, CYAN),
+                Block(x, y + 2, CYAN),
+                Block(x + 2, y + 2, CYAN)
+            ]
+
+        elif self.rotation == 3:
+
+            self.blocks = [
+                Block(x, y, CYAN),
+                Block(x + 1, y + 1, CYAN),
+                Block(x + 2, y + 1, CYAN),
+                Block(x, y + 2, CYAN)
+            ]
 
     def draw(self, screen):
 

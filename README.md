@@ -41,6 +41,8 @@ Early development
 - Added function to let pieces fall.
 - Removed some redundant code.
 - Implemented basic piece collision and board locking.
+- Added player input detection and further board collision testing
+- Implemented basic piece rotation (Still need to update collision testing for this)
 - Updated README
 
 ---
