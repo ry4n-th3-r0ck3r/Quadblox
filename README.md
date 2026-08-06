@@ -8,22 +8,22 @@ This project serves two purposes:
 - Practice object oriented programming, game architecture, collision detection, rendering, and software design.
 
 ## Status
-Early development
 
-## Planned Features
+Alpha Testing
+
+## Current Features
 
 - Classic falling block gameplay
 - Piece rotation
 - Line clearing
+
+## Planned Features
+
 - Score tracking
 - Increasing difficulty
 - High score saving
 - Sound effects and music
 - Clean, maintainable codebase
-
-## Current Features
--Game board prints
--All game pieces are defined
 
 ## Technologies
 
@@ -42,9 +42,10 @@ Early development
 - Removed some redundant code.
 - Implemented basic piece collision and board locking.
 - Added player input detection and further board collision testing
-- Implemented basic piece rotation (Still need to update collision testing for this)
-- Fine tuned piece rotation.
+- Implemented piece rotation.
 - Added increased falling speed for generated blocks via down arrow.
+- Added basic line clearing. (Still needs improvement)
+- Game now ends if spawn point is occupied.
 - Updated README
 
 ---

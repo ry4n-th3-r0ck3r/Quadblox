@@ -66,3 +66,50 @@ class Board:
 
         for block in piece.blocks:
             self.grid[block.y][block.x] = block.color
+
+    #Checks to see if rows are full.
+    def find_full_rows(self):
+
+        full_rows = []
+
+        # Skip top and bottom border
+        for y in range(1, self.height - 1):
+
+            row_full = True
+
+            # Skip left and right border
+            for x in range(1, self.width - 1):
+
+                if self.grid[y][x] is None:
+                    row_full = False
+                    break
+
+            if row_full:
+                full_rows.append(y)
+
+        return full_rows
+
+    #Clears full rows
+    def clear_rows(self):
+
+        full_rows = self.find_full_rows()
+
+        if not full_rows:
+            return 0
+
+        for y in full_rows:
+
+            for x in range(1, self.width - 1):
+                self.grid[y][x] = None
+
+        return len(full_rows)
+
+    #Checks for "game over"
+    def is_game_over(self, piece):
+
+        for block in piece.blocks:
+
+            if self.is_occupied(block.x, block.y):
+                return True
+
+        return False

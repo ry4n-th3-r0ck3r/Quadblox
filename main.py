@@ -77,7 +77,17 @@ while running:
             piece.move_down()
         else:
             board.lock_piece(piece)
+
+            # Check for completed rows
+            rows_cleared = board.clear_rows()
+
+            #For testing purposes.
+            if rows_cleared:
+                print(f"Rows cleared: {rows_cleared}")
             piece = spawn_piece()
+
+            if board.is_game_over(piece):
+                running = False
 
         last_fall = current_time
 
