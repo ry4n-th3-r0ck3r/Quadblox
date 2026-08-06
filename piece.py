@@ -43,7 +43,7 @@ class Piece:
             self.max_rotation = 1
             self.z_piece()
 
-#Draws the new shape with the requested rotation.
+#Draws the new shape with the requested change.
 
     def rebuild(self):
 
@@ -68,6 +68,76 @@ class Piece:
         elif self.name == "z":
             self.z_piece()
 
+    def get_rotated_blocks(self):
+
+        old_rotation = self.rotation
+        old_blocks = self.blocks
+
+        self.rotation += 1
+
+        if self.rotation > self.max_rotation:
+            self.rotation = 0
+
+        self.rebuild()
+
+        rotated_blocks = self.blocks
+
+        # Restore the current piece
+        self.rotation = old_rotation
+        self.blocks = old_blocks
+
+        return rotated_blocks
+
+    def try_rotate(self, board):
+
+        if self.max_rotation == 0:
+            return
+
+        rotated_blocks = self.get_rotated_blocks()
+
+        # Try rotation normally first
+        if self.rotation_is_valid(board, rotated_blocks):
+            self.apply_rotation()
+            return
+
+        # Try pushing one square right
+        if self.rotation_is_valid(board, rotated_blocks, offset_x=1):
+            self.x += 1
+            self.apply_rotation()
+            return
+
+        # Try pushing one square left
+        if self.rotation_is_valid(board, rotated_blocks, offset_x=-1):
+            self.x -= 1
+            self.apply_rotation()
+
+    def rotation_is_valid(self, board, rotated_blocks, offset_x=0):
+
+        for block in rotated_blocks:
+
+            test_x = block.x + offset_x
+            test_y = block.y
+
+            # Prevent any out-of-range board access
+            if test_x < 0 or test_x >= board.width:
+                return False
+
+            if test_y < 0 or test_y >= board.height:
+                return False
+
+            if board.is_occupied(test_x, test_y):
+                return False
+
+        return True
+
+    def apply_rotation(self):
+
+        self.rotation += 1
+
+        if self.rotation > self.max_rotation:
+            self.rotation = 0
+
+        self.rebuild()
 
 #Lets the piece move downward. Simply increases y value to create downward movement.
     def move_down(self):

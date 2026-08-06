@@ -24,7 +24,11 @@ pygame.display.set_caption(WINDOW_TITLE)
 # Control frame rate
 clock = pygame.time.Clock()
 FPS = 60
-fall_delay = 500      # milliseconds
+
+NORMAL_FALL_DELAY = 500
+FAST_FALL_DELAY = 50
+fall_delay = NORMAL_FALL_DELAY     # milliseconds
+
 last_fall = pygame.time.get_ticks()
 
 # Create the game board
@@ -56,8 +60,15 @@ while running:
                     piece.move_right()
 
             elif event.key == pygame.K_UP:
+                    piece.try_rotate(board)
 
-                piece.rotate()
+            elif event.key == pygame.K_DOWN:
+                    fall_delay = FAST_FALL_DELAY
+
+        elif event.type == pygame.KEYUP:
+
+            if event.key == pygame.K_DOWN:
+                fall_delay = NORMAL_FALL_DELAY
 
     current_time = pygame.time.get_ticks()
 

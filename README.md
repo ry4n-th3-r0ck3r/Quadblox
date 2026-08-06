@@ -43,6 +43,8 @@ Early development
 - Implemented basic piece collision and board locking.
 - Added player input detection and further board collision testing
 - Implemented basic piece rotation (Still need to update collision testing for this)
+- Fine tuned piece rotation.
+- Added increased falling speed for generated blocks via down arrow.
 - Updated README
 
 ---
