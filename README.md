@@ -16,6 +16,7 @@ Alpha Testing
 - Classic falling block gameplay
 - Piece rotation
 - Line clearing
+- Pieces fall after line clear
 
 ## Planned Features
 
@@ -44,7 +45,8 @@ Alpha Testing
 - Added player input detection and further board collision testing
 - Implemented piece rotation.
 - Added increased falling speed for generated blocks via down arrow.
-- Added basic line clearing. (Still needs improvement)
+- Added basic line clearing. 
+- Blocks fall if nothing beneath them after line clearing.
 - Game now ends if spawn point is occupied.
 - Updated README
 

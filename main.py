@@ -81,9 +81,12 @@ while running:
             # Check for completed rows
             rows_cleared = board.clear_rows()
 
+            if rows_cleared > 0:
+                board.drop_blocks()
             #For testing purposes.
             if rows_cleared:
                 print(f"Rows cleared: {rows_cleared}")
+
             piece = spawn_piece()
 
             if board.is_game_over(piece):

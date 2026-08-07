@@ -104,6 +104,32 @@ class Board:
 
         return len(full_rows)
 
+#Makes blocks fall if nothing below them.
+    def drop_blocks(self):
+
+        blocks_moved = True
+
+        while blocks_moved:
+
+            blocks_moved = False
+
+            # Start at the bottom and work upward
+            for y in range(self.height - 2, 0, -1):
+
+                # Only check playable columns
+                for x in range(1, self.width - 1):
+
+                    # Is there a block here?
+                    if self.grid[y][x] is not None:
+
+                        # Is the space directly below empty?
+                        if self.grid[y + 1][x] is None:
+                            # Move the block down
+                            self.grid[y + 1][x] = self.grid[y][x]
+                            self.grid[y][x] = None
+
+                            blocks_moved = True
+
     #Checks for "game over"
     def is_game_over(self, piece):
 
