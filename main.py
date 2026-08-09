@@ -34,8 +34,14 @@ last_fall = pygame.time.get_ticks()
 # Create the game board
 board = Board()
 
+#Player score
+score = 0
+
 #Creates a random piece to start the game.
 piece = spawn_piece()
+
+#Sets text font for the display.
+font = pygame.font.Font(None, 36)
 
 running = True
 
@@ -78,15 +84,22 @@ while running:
         else:
             board.lock_piece(piece)
 
-            # Check for completed rows
-            rows_cleared = board.clear_rows()
+            # Keep clearing until the board is stable
+            while True:
 
-            if rows_cleared > 0:
+                rows_cleared = board.clear_rows()
+
+                # No more completed rows
+                if rows_cleared == 0:
+                    break
+
+                # Add score
+                score += rows_cleared * 100
+
+                # Let unsupported blocks fall
                 board.drop_blocks()
-            #For testing purposes.
-            if rows_cleared:
-                print(f"Rows cleared: {rows_cleared}")
 
+            # Board is now finished updating
             piece = spawn_piece()
 
             if board.is_game_over(piece):
@@ -101,6 +114,9 @@ while running:
     board.draw(screen)
 
     piece.draw(screen)
+
+    score_text = font.render(f"Score: {score}", True, (255, 255, 255))
+    screen.blit(score_text, (350, 10))
 
     # Update display
     pygame.display.flip()

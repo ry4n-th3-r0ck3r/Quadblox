@@ -1,4 +1,4 @@
-# QuadBlox (In Progress...)
+# QuadBlox (Playable)
 
 QuadBlox is a falling block puzzle game written in Python using Pygame.
 
@@ -9,7 +9,7 @@ This project serves two purposes:
 
 ## Status
 
-Alpha Testing
+Playable prototype
 
 ## Current Features
 
@@ -17,10 +17,10 @@ Alpha Testing
 - Piece rotation
 - Line clearing
 - Pieces fall after line clear
+- Score tracking
 
 ## Planned Features
 
-- Score tracking
 - Increasing difficulty
 - High score saving
 - Sound effects and music
@@ -48,6 +48,8 @@ Alpha Testing
 - Added basic line clearing. 
 - Blocks fall if nothing beneath them after line clearing.
 - Game now ends if spawn point is occupied.
+- Added scoring
+- Fixed line clearing glitch. Program now checks more regularly.
 - Updated README
 
 ---
