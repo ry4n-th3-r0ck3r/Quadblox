@@ -5,8 +5,26 @@ from board import Board
 from block import Block
 from piece import *
 
+#Draw function for the game board.
+def draw_game(draw_piece=True):
 
-# Initialize Pygame
+    # Clear screen
+    screen.fill((0, 0, 0))
+
+    # Draw board
+    board.draw(screen)
+
+    # Draw current piece
+    piece.draw(screen)
+
+    # Draw score
+    score_text = font.render(f"Score: {score}", True, (255, 255, 255))
+    screen.blit(score_text, (350, 1))
+
+    # Update display
+    pygame.display.flip()
+
+# Initialize pygame
 pygame.init()
 
 # Window settings
@@ -96,6 +114,12 @@ while running:
                 # Add score
                 score += rows_cleared * 100
 
+                # Draw the board after the line disappears
+                draw_game(False)
+
+                # Let the player see the cleared line
+                pygame.time.delay(250)
+
                 # Let unsupported blocks fall
                 board.drop_blocks()
 
@@ -109,17 +133,7 @@ while running:
 
 
     # Draw
-    screen.fill((0, 0, 0))
-
-    board.draw(screen)
-
-    piece.draw(screen)
-
-    score_text = font.render(f"Score: {score}", True, (255, 255, 255))
-    screen.blit(score_text, (350, 10))
-
-    # Update display
-    pygame.display.flip()
+    draw_game()
 
     # Maintain FPS
     clock.tick(FPS)

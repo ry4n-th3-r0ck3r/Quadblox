@@ -50,6 +50,7 @@ Playable prototype
 - Game now ends if spawn point is occupied.
 - Added scoring
 - Fixed line clearing glitch. Program now checks more regularly.
+- Improved code modularity and adjusted line clearing view.
 - Updated README
 
 ---
