@@ -114,13 +114,12 @@ while running:
                 # Add score
                 score += rows_cleared * 100
 
-                # Draw the board after the line disappears
+                # Show that line disappearing
                 draw_game(False)
 
-                # Let the player see the cleared line
-                pygame.time.delay(250)
+                pygame.time.delay(300)
 
-                # Let unsupported blocks fall
+                # Drop blocks
                 board.drop_blocks()
 
             # Board is now finished updating

@@ -412,48 +412,6 @@ class Piece:
                 Block(x, y + 2, VIOLET)
             ]
 
-#This is a piece that needs testing before full implementation.
-    def y_piece(self):
-
-        x = self.x
-        y = self.y
-
-        if self.rotation == 0:
-
-            self.blocks = [
-                Block(x, y, CYAN),
-                Block(x + 2, y, CYAN),
-                Block(x + 1, y + 1, CYAN),
-                Block(x + 1, y + 2, CYAN)
-            ]
-
-        elif self.rotation == 1:
-
-            self.blocks = [
-                Block(x + 2, y, CYAN),
-                Block(x, y + 1, CYAN),
-                Block(x + 1, y + 1, CYAN),
-                Block(x + 2, y + 2, CYAN)
-            ]
-
-        elif self.rotation == 2:
-
-            self.blocks = [
-                Block(x + 1, y, CYAN),
-                Block(x + 1, y + 1, CYAN),
-                Block(x, y + 2, CYAN),
-                Block(x + 2, y + 2, CYAN)
-            ]
-
-        elif self.rotation == 3:
-
-            self.blocks = [
-                Block(x, y, CYAN),
-                Block(x + 1, y + 1, CYAN),
-                Block(x + 2, y + 1, CYAN),
-                Block(x, y + 2, CYAN)
-            ]
-
     def draw(self, screen):
 
         for block in self.blocks:
@@ -469,7 +427,7 @@ def spawn_piece():
         "j",
         "t",
         "s",
-        "z"
+        "z",
     ]
 
     shape = random.choice(shapes)

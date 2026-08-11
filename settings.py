@@ -13,7 +13,9 @@ INDIGO = (75, 0, 130)
 VIOLET = (170, 80, 255)
 
 #Other colors.
-CYAN = (0, 220, 220)
+SKY_BLUE = (100, 200, 255)
+CLOUD_WHITE = (245, 245, 245)
+GRID_BLUE = (70, 160, 210)
 
 #Gameboard colors
 

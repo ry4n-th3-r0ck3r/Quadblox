@@ -38,7 +38,6 @@ Playable prototype
 - Adjusted settings variables for smoother coding. 
 - Created spawn function for pieces.
 - Adjusted coloring to match rainbow colors. 7 pieces for 7 colors.
-- Added new experimental 'Y' piece for testing once development is done.
 - Added function to let pieces fall.
 - Removed some redundant code.
 - Implemented basic piece collision and board locking.
@@ -51,6 +50,7 @@ Playable prototype
 - Added scoring
 - Fixed line clearing glitch. Program now checks more regularly.
 - Improved code modularity and adjusted line clearing view.
+- Adjusted code to improve readability and smoother game function.
 - Updated README
 
 ---

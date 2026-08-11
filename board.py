@@ -97,12 +97,13 @@ class Board:
         if not full_rows:
             return 0
 
-        for y in full_rows:
+        # Clear one row at a time
+        y = full_rows[-1]
 
-            for x in range(1, self.width - 1):
-                self.grid[y][x] = None
+        for x in range(1, self.width - 1):
+            self.grid[y][x] = None
 
-        return len(full_rows)
+        return 1
 
 #Makes blocks fall if nothing below them.
     def drop_blocks(self):
