@@ -9,7 +9,7 @@ This project serves two purposes:
 
 ## Status
 
-Playable prototype
+Beta Testing
 
 ## Current Features
 
@@ -24,7 +24,6 @@ Playable prototype
 - Increasing difficulty
 - High score saving
 - Sound effects and music
-- Clean, maintainable codebase
 
 ## Technologies
 
