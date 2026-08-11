@@ -21,6 +21,14 @@ def draw_game(draw_piece=True):
     score_text = font.render(f"Score: {score}", True, (255, 255, 255))
     screen.blit(score_text, (350, 1))
 
+    #Draw Instructions
+    y = 100
+
+    for line in instructions:
+        text = font.render(line, True, (255, 255, 255))
+        screen.blit(text, (400, y))
+        y += 30
+
     # Update display
     pygame.display.flip()
 
@@ -31,6 +39,22 @@ pygame.init()
 WINDOW_WIDTH = 800
 WINDOW_HEIGHT = 600
 WINDOW_TITLE = "QuadBlox"
+
+#Instructions settings
+instructions = [
+    "HOW TO PLAY",
+    "",
+    "Left, Right   Move",
+    "Down  Fast Fall",
+    "Up    Rotate",
+    "",
+    "Complete a row to clear it.",
+    "",
+    "Rows clear from bottom to top.",
+    "Blocks above cleared rows fall.",
+    "",
+    "Don't reach the top!"
+]
 
 # Colors
 BACKGROUND_COLOR = (30, 30, 30)
@@ -121,6 +145,11 @@ while running:
 
                 # Drop blocks
                 board.drop_blocks()
+
+                # Show that line disappearing
+                draw_game(False)
+
+                pygame.time.delay(300)
 
             # Board is now finished updating
             piece = spawn_piece()

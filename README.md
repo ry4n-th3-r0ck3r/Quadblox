@@ -51,6 +51,7 @@ Playable prototype
 - Fixed line clearing glitch. Program now checks more regularly.
 - Improved code modularity and adjusted line clearing view.
 - Adjusted code to improve readability and smoother game function.
+- Added game instructions during gameplay.
 - Updated README
 
 ---
