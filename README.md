@@ -18,6 +18,7 @@ Beta Testing
 - Line clearing
 - Pieces fall after line clear
 - Score tracking
+- Preview of next piece
 
 ## Planned Features
 
@@ -51,6 +52,8 @@ Beta Testing
 - Improved code modularity and adjusted line clearing view.
 - Adjusted code to improve readability and smoother game function.
 - Added game instructions during gameplay.
+- Added piece preview
+- Slightly improved code logic
 - Updated README
 
 ---

@@ -5,31 +5,59 @@ from board import Board
 from block import Block
 from piece import *
 
+#Draw the preview piece
+def draw_next_piece():
+
+    preview_x = 500
+    preview_y = 110
+
+    for block in next_piece.blocks:
+
+        relative_x = block.x - next_piece.x
+        relative_y = block.y - next_piece.y
+
+        x = preview_x + relative_x * BLOCK_SIZE
+        y = preview_y + relative_y * BLOCK_SIZE
+
+        rect = pygame.Rect(
+            x,
+            y,
+            BLOCK_SIZE,
+            BLOCK_SIZE
+        )
+
+        pygame.draw.rect(screen, block.color, rect)
+        pygame.draw.rect(screen, GRID_COLOR, rect, 1)
+
 #Draw function for the game board.
 def draw_game(draw_piece=True):
 
-    # Clear screen
     screen.fill((0, 0, 0))
 
-    # Draw board
     board.draw(screen)
 
-    # Draw current piece
-    piece.draw(screen)
+    if draw_piece:
+        piece.draw(screen)
 
-    # Draw score
+    # Score
     score_text = font.render(f"Score: {score}", True, (255, 255, 255))
     screen.blit(score_text, (350, 1))
 
-    #Draw Instructions
-    y = 100
+    # Next piece
+    next_text = font.render("Next:", True, (255, 255, 255))
+    screen.blit(next_text, (400, 50))
+
+    draw_next_piece()
+
+
+    # Instructions
+    y = 300
 
     for line in instructions:
-        text = font.render(line, True, (255, 255, 255))
+        text = instruction_font.render(line, True, (255, 255, 255))
         screen.blit(text, (400, y))
-        y += 30
+        y += 25
 
-    # Update display
     pygame.display.flip()
 
 # Initialize pygame
@@ -79,11 +107,14 @@ board = Board()
 #Player score
 score = 0
 
-#Creates a random piece to start the game.
+# Create a current piece and a preview piece
 piece = spawn_piece()
+next_piece = spawn_piece()
 
 #Sets text font for the display.
 font = pygame.font.Font(None, 36)
+#Smaller font for game instructions
+instruction_font = pygame.font.Font(None, 24)
 
 running = True
 
@@ -152,7 +183,8 @@ while running:
                 pygame.time.delay(300)
 
             # Board is now finished updating
-            piece = spawn_piece()
+            piece = next_piece
+            next_piece = spawn_piece()
 
             if board.is_game_over(piece):
                 running = False
