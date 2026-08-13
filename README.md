@@ -19,10 +19,10 @@ Beta Testing
 - Pieces fall after line clear
 - Score tracking
 - Preview of next piece
+- Increasing difficulty
 
 ## Planned Features
 
-- Increasing difficulty
 - High score saving
 - Sound effects and music
 
@@ -54,6 +54,8 @@ Beta Testing
 - Added game instructions during gameplay.
 - Added piece preview
 - Slightly improved code logic
+- Added levels with increased falling block speed
+- Added Game Over screen
 - Updated README
 
 ---

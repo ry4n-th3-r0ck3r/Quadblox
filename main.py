@@ -43,6 +43,10 @@ def draw_game(draw_piece=True):
     score_text = font.render(f"Score: {score}", True, (255, 255, 255))
     screen.blit(score_text, (350, 1))
 
+    # Draw level
+    level_text = font.render(f"Level: {level}", True, (255, 255, 255))
+    screen.blit(level_text, (550, 1))
+
     # Next piece
     next_text = font.render("Next:", True, (255, 255, 255))
     screen.blit(next_text, (400, 50))
@@ -60,6 +64,42 @@ def draw_game(draw_piece=True):
 
     pygame.display.flip()
 
+#Game Over Screen
+def draw_game_over():
+
+    screen.fill((0, 0, 0))
+
+    game_over_text = font.render(
+        "GAME OVER",
+        True,
+        (255, 255, 255)
+    )
+
+    score_text = font.render(
+        f"Final Score: {score}",
+        True,
+        (255, 255, 255)
+    )
+
+    level_text = font.render(
+        f"Level: {level}",
+        True,
+        (255, 255, 255)
+    )
+
+    exit_text = instruction_font.render(
+        "Press SPACE to exit",
+        True,
+        (255, 255, 255)
+    )
+
+    screen.blit(game_over_text, (300, 180))
+    screen.blit(score_text, (300, 240))
+    screen.blit(level_text, (300, 290))
+    screen.blit(exit_text, (300, 360))
+
+    pygame.display.flip()
+
 # Initialize pygame
 pygame.init()
 
@@ -72,14 +112,14 @@ WINDOW_TITLE = "QuadBlox"
 instructions = [
     "HOW TO PLAY",
     "",
-    "Left, Right   Move",
-    "Down  Fast Fall",
-    "Up    Rotate",
+    "Left/Right - Move",
+    "Down - Fast Fall",
+    "Up - Rotate",
     "",
     "Complete a row to clear it.",
     "",
     "Rows clear from bottom to top.",
-    "Blocks above cleared rows fall.",
+    "Blocks above cleared rows collapse.",
     "",
     "Don't reach the top!"
 ]
@@ -99,13 +139,14 @@ NORMAL_FALL_DELAY = 500
 FAST_FALL_DELAY = 50
 fall_delay = NORMAL_FALL_DELAY     # milliseconds
 
+#Base level and score
+level = 1
+score = 0
+
 last_fall = pygame.time.get_ticks()
 
 # Create the game board
 board = Board()
-
-#Player score
-score = 0
 
 # Create a current piece and a preview piece
 piece = spawn_piece()
@@ -117,6 +158,7 @@ font = pygame.font.Font(None, 36)
 instruction_font = pygame.font.Font(None, 24)
 
 running = True
+game_over = False
 
 while running:
 
@@ -125,6 +167,13 @@ while running:
 
         if event.type == pygame.QUIT:
             running = False
+
+        # Game over controls
+        elif game_over:
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    running = False
 
         elif event.type == pygame.KEYDOWN:
 
@@ -151,7 +200,7 @@ while running:
 
     current_time = pygame.time.get_ticks()
 
-    if current_time - last_fall > fall_delay:
+    if not game_over and current_time - last_fall > fall_delay:
         if piece.can_move_down(board):
             piece.move_down()
         else:
@@ -166,8 +215,28 @@ while running:
                 if rows_cleared == 0:
                     break
 
-                # Add score
-                score += rows_cleared * 100
+                # Add score/modify level
+                score += rows_cleared * (level * 100)
+                # Adjust difficulty
+                if score >= 4000:
+                    level = 5
+                    NORMAL_FALL_DELAY = 100
+
+                elif score >= 3000:
+                    level = 4
+                    NORMAL_FALL_DELAY = 200
+
+                elif score >= 2000:
+                    level = 3
+                    NORMAL_FALL_DELAY = 300
+
+                elif score >= 1000:
+                    level = 2
+                    NORMAL_FALL_DELAY = 400
+
+                else:
+                    level = 1
+                    NORMAL_FALL_DELAY = 500
 
                 # Show that line disappearing
                 draw_game(False)
@@ -187,13 +256,16 @@ while running:
             next_piece = spawn_piece()
 
             if board.is_game_over(piece):
-                running = False
+                game_over = True
 
         last_fall = current_time
 
 
     # Draw
-    draw_game()
+    if game_over:
+        draw_game_over()
+    else:
+        draw_game()
 
     # Maintain FPS
     clock.tick(FPS)
