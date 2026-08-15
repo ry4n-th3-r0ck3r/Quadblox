@@ -57,7 +57,8 @@ Beta Testing
 - Slightly improved code logic
 - Added levels with increased falling block speed
 - Added Game Over screen
-- Added background music
+- Adjusted background music
+- Updated level system
 - Updated README
 
 ---

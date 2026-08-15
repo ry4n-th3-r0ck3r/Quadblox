@@ -227,19 +227,19 @@ while running:
                 # Add score/modify level
                 score += rows_cleared * (level * 100)
                 # Adjust difficulty
-                if score >= 10000:
+                if score >= 20000:
                     level = 5
                     NORMAL_FALL_DELAY = 100
 
-                elif score >= 8000:
+                elif score >= 12000:
                     level = 4
                     NORMAL_FALL_DELAY = 200
 
-                elif score >= 4000:
+                elif score >= 6000:
                     level = 3
                     NORMAL_FALL_DELAY = 300
 
-                elif score >= 2000:
+                elif score >= 3000:
                     level = 2
                     NORMAL_FALL_DELAY = 400
 
