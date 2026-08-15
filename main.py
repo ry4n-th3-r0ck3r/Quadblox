@@ -1,6 +1,15 @@
 import sys
 import pygame
 
+#Clarifies mixer is being used. Using it for background music.
+pygame.init()
+pygame.mixer.init()
+
+#Sets music to play and loop for the background song.
+pygame.mixer.music.load("Assets/Music/Dance of the Sugar Plum Fairy.mp3")
+pygame.mixer.music.set_volume(0.4)
+pygame.mixer.music.play(-1)
+
 from board import Board
 from block import Block
 from piece import *
@@ -218,19 +227,19 @@ while running:
                 # Add score/modify level
                 score += rows_cleared * (level * 100)
                 # Adjust difficulty
-                if score >= 4000:
+                if score >= 10000:
                     level = 5
                     NORMAL_FALL_DELAY = 100
 
-                elif score >= 3000:
+                elif score >= 8000:
                     level = 4
                     NORMAL_FALL_DELAY = 200
 
-                elif score >= 2000:
+                elif score >= 4000:
                     level = 3
                     NORMAL_FALL_DELAY = 300
 
-                elif score >= 1000:
+                elif score >= 2000:
                     level = 2
                     NORMAL_FALL_DELAY = 400
 
@@ -258,11 +267,13 @@ while running:
             if board.is_game_over(piece):
                 game_over = True
 
+
         last_fall = current_time
 
 
     # Draw
     if game_over:
+        pygame.mixer.music.stop()
         draw_game_over()
     else:
         draw_game()

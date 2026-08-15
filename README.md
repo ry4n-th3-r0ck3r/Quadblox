@@ -20,11 +20,12 @@ Beta Testing
 - Score tracking
 - Preview of next piece
 - Increasing difficulty
+- Background music
 
 ## Planned Features
 
 - High score saving
-- Sound effects and music
+- Sound effects
 
 ## Technologies
 
@@ -56,6 +57,7 @@ Beta Testing
 - Slightly improved code logic
 - Added levels with increased falling block speed
 - Added Game Over screen
+- Added background music
 - Updated README
 
 ---
