@@ -21,6 +21,7 @@ Beta Testing
 - Preview of next piece
 - Increasing difficulty
 - Background music
+- Pause Function
 
 ## Planned Features
 
@@ -59,6 +60,7 @@ Beta Testing
 - Added Game Over screen
 - Adjusted background music
 - Updated level system
+- Added Pause Menu
 - Updated README
 
 ---

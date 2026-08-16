@@ -62,7 +62,6 @@ def draw_game(draw_piece=True):
 
     draw_next_piece()
 
-
     # Instructions
     y = 300
 
@@ -71,6 +70,19 @@ def draw_game(draw_piece=True):
         screen.blit(text, (400, y))
         y += 25
 
+    # Pause overlay
+    if paused:
+        pause_text = font.render("PAUSED", True, (255, 255, 255))
+        screen.blit(pause_text, (100, 250))
+        continue_text = instruction_font.render(
+            "Press SPACE to continue",
+            True,
+            (255, 255, 255)
+        )
+
+        screen.blit(continue_text, (65, 290))
+
+    # Update screen ONCE after everything is drawn
     pygame.display.flip()
 
 #Game Over Screen
@@ -124,12 +136,12 @@ instructions = [
     "Left/Right - Move",
     "Down - Fast Fall",
     "Up - Rotate",
+    "Space Bar - Pause.",
     "",
     "Complete a row to clear it.",
     "",
     "Rows clear from bottom to top.",
     "Blocks above cleared rows collapse.",
-    "",
     "Don't reach the top!"
 ]
 
@@ -168,6 +180,7 @@ instruction_font = pygame.font.Font(None, 24)
 
 running = True
 game_over = False
+paused = False
 
 while running:
 
@@ -185,22 +198,33 @@ while running:
                     running = False
 
         elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE:
 
-            if event.key == pygame.K_LEFT:
+                paused = not paused
 
-                if piece.can_move_left(board):
-                    piece.move_left()
+                if paused:
+                    pygame.mixer.music.pause()
 
-            elif event.key == pygame.K_RIGHT:
+                else:
+                    pygame.mixer.music.unpause()
+                    last_fall = pygame.time.get_ticks()
 
-                if piece.can_move_right(board):
-                    piece.move_right()
+            elif not paused:
+                if event.key == pygame.K_LEFT:
 
-            elif event.key == pygame.K_UP:
-                    piece.try_rotate(board)
+                    if piece.can_move_left(board):
+                        piece.move_left()
 
-            elif event.key == pygame.K_DOWN:
-                    fall_delay = FAST_FALL_DELAY
+                elif event.key == pygame.K_RIGHT:
+
+                    if piece.can_move_right(board):
+                        piece.move_right()
+
+                elif event.key == pygame.K_UP:
+                        piece.try_rotate(board)
+
+                elif event.key == pygame.K_DOWN:
+                        fall_delay = FAST_FALL_DELAY
 
         elif event.type == pygame.KEYUP:
 
@@ -209,7 +233,7 @@ while running:
 
     current_time = pygame.time.get_ticks()
 
-    if not game_over and current_time - last_fall > fall_delay:
+    if not game_over and not paused and current_time - last_fall > fall_delay:
         if piece.can_move_down(board):
             piece.move_down()
         else:
