@@ -22,10 +22,10 @@ Beta Testing
 - Increasing difficulty
 - Background music
 - Pause Function
+- High score saving
 
 ## Planned Features
 
-- High score saving
 - Sound effects
 
 ## Technologies
@@ -61,6 +61,8 @@ Beta Testing
 - Adjusted background music
 - Updated level system
 - Added Pause Menu
+- Added high score saving and posting
+- Music now ends when game ends
 - Updated README
 
 ---

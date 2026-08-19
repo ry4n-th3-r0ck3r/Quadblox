@@ -90,23 +90,43 @@ def draw_game_over():
 
     screen.fill((0, 0, 0))
 
-    game_over_text = font.render(
+    title = font.render(
         "GAME OVER",
         True,
         (255, 255, 255)
     )
 
-    score_text = font.render(
-        f"Final Score: {score}",
+    screen.blit(title, (300, 40))
+
+    score_text = instruction_font.render(
+        f"Score: {score}   Level: {level}",
         True,
         (255, 255, 255)
     )
 
-    level_text = font.render(
-        f"Level: {level}",
+    screen.blit(score_text, (300, 90))
+
+    heading = font.render(
+        "HIGH SCORES",
         True,
         (255, 255, 255)
     )
+
+    screen.blit(heading, (280, 140))
+
+    y = 190
+
+    for position, (name, saved_score) in enumerate(high_scores, start=1):
+
+        line = instruction_font.render(
+            f"{position:2}. {name:3}   {saved_score}",
+            True,
+            (255, 255, 255)
+        )
+
+        screen.blit(line, (280, y))
+
+        y += 28
 
     exit_text = instruction_font.render(
         "Press SPACE to exit",
@@ -114,15 +134,83 @@ def draw_game_over():
         (255, 255, 255)
     )
 
-    screen.blit(game_over_text, (300, 180))
-    screen.blit(score_text, (300, 240))
-    screen.blit(level_text, (300, 290))
-    screen.blit(exit_text, (300, 360))
+    screen.blit(exit_text, (300, 520))
 
     pygame.display.flip()
 
+#Reads in high scores
+def load_high_scores():
+
+    scores = []
+
+    try:
+        with open("highscores.txt", "r") as file:
+
+            for line in file:
+
+                name, score = line.strip().split(",")
+
+                scores.append((name, int(score)))
+
+    except FileNotFoundError:
+        pass
+
+    return scores
+
+#Saves high scores
+def save_high_scores():
+
+    with open("highscores.txt", "w") as file:
+
+        for name, saved_score in high_scores:
+
+            file.write(f"{name},{saved_score}\n")
+
+#Checks if score makes the high score list
+def is_high_score(score):
+
+    if len(high_scores) < 10:
+        return True
+
+    return score > high_scores[-1][1]
 # Initialize pygame
 pygame.init()
+
+#Draws high score board
+def draw_name_entry():
+
+    screen.fill((0, 0, 0))
+
+    title = font.render(
+        "NEW HIGH SCORE!",
+        True,
+        (255, 255, 255)
+    )
+
+    score_text = font.render(
+        f"Score: {score}",
+        True,
+        (255, 255, 255)
+    )
+
+    name_text = font.render(
+        f"Name: {player_name}",
+        True,
+        (255, 255, 255)
+    )
+
+    instruction = instruction_font.render(
+        "Enter up to 3 letters - ENTER to save",
+        True,
+        (255, 255, 255)
+    )
+
+    screen.blit(title, (250, 180))
+    screen.blit(score_text, (300, 240))
+    screen.blit(name_text, (300, 300))
+    screen.blit(instruction, (220, 360))
+
+    pygame.display.flip()
 
 # Window settings
 WINDOW_WIDTH = 800
@@ -178,9 +266,16 @@ font = pygame.font.Font(None, 36)
 #Smaller font for game instructions
 instruction_font = pygame.font.Font(None, 24)
 
+#For high scores
+high_scores = load_high_scores()
+name_entry = False
+player_name = ""
+
+#Game logic
 running = True
 game_over = False
 paused = False
+
 
 while running:
 
@@ -190,12 +285,43 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
+        # High Score entry
+        elif name_entry:
+
+            if event.type == pygame.KEYDOWN:
+
+                if event.key == pygame.K_RETURN:
+
+                    if len(player_name) > 0:
+                        high_scores.append((player_name, score))
+
+                        high_scores.sort(
+                            key=lambda entry: entry[1],
+                            reverse=True
+                        )
+
+                        high_scores = high_scores[:10]
+
+                        save_high_scores()
+
+                        name_entry = False
+
+                elif event.key == pygame.K_BACKSPACE:
+                    player_name = player_name[:-1]
+
+                elif len(player_name) < 3:
+
+                    letter = event.unicode.upper()
+
+                    if letter.isalpha():
+                        player_name += letter
         # Game over controls
         elif game_over:
 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     running = False
+
 
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
@@ -289,16 +415,25 @@ while running:
             next_piece = spawn_piece()
 
             if board.is_game_over(piece):
+
                 game_over = True
+                # Stop the music during game over.
+                pygame.mixer.music.stop()
+
+                if is_high_score(score):
+                    name_entry = True
 
 
         last_fall = current_time
 
 
     # Draw
-    if game_over:
-        pygame.mixer.music.stop()
+    if name_entry:
+        draw_name_entry()
+
+    elif game_over:
         draw_game_over()
+
     else:
         draw_game()
 
