@@ -365,31 +365,38 @@ while running:
         else:
             board.lock_piece(piece)
 
+            # Count lines cleared by this piece
+            lines_cleared = 0
+
             # Keep clearing until the board is stable
             while True:
 
                 rows_cleared = board.clear_rows()
+
+                # Keep track of every row that actually cleared
+                lines_cleared += rows_cleared
+                modifier = lines_cleared
 
                 # No more completed rows
                 if rows_cleared == 0:
                     break
 
                 # Add score/modify level
-                score += rows_cleared * (level * 100)
+                score += lines_cleared * 100 * modifier * level
                 # Adjust difficulty
-                if score >= 20000:
+                if score >= 30000:
                     level = 5
                     NORMAL_FALL_DELAY = 100
 
-                elif score >= 12000:
+                elif score >= 20000:
                     level = 4
                     NORMAL_FALL_DELAY = 200
 
-                elif score >= 6000:
+                elif score >= 10000:
                     level = 3
                     NORMAL_FALL_DELAY = 300
 
-                elif score >= 3000:
+                elif score >= 5000:
                     level = 2
                     NORMAL_FALL_DELAY = 400
 

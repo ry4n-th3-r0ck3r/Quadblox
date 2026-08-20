@@ -63,6 +63,7 @@ Beta Testing
 - Added Pause Menu
 - Added high score saving and posting
 - Music now ends when game ends
+- Scoring/level system adjusted
 - Updated README
 
 ---
