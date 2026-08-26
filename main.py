@@ -10,6 +10,18 @@ pygame.mixer.music.load("Assets/Music/Dance of the Sugar Plum Fairy.mp3")
 pygame.mixer.music.set_volume(0.4)
 pygame.mixer.music.play(-1)
 
+#Adds sound effects.
+
+# Sound effects.
+rotate_sound = pygame.mixer.Sound("Assets/Sounds/rotate.wav")
+line_clear_sound = pygame.mixer.Sound("Assets/Sounds/line_clear.wav")
+game_over_sound = pygame.mixer.Sound("Assets/Sounds/game_over.wav")
+
+# Optional volume control
+rotate_sound.set_volume(0.5)
+line_clear_sound.set_volume(0.5)
+game_over_sound.set_volume(0.5)
+
 from board import Board
 from block import Block
 from piece import *
@@ -348,6 +360,7 @@ while running:
 
                 elif event.key == pygame.K_UP:
                         piece.try_rotate(board)
+                        rotate_sound.play()
 
                 elif event.key == pygame.K_DOWN:
                         fall_delay = FAST_FALL_DELAY
@@ -380,6 +393,8 @@ while running:
                 # No more completed rows
                 if rows_cleared == 0:
                     break
+
+                line_clear_sound.play()
 
                 # Add score/modify level
                 score += lines_cleared * 100 * modifier * level
@@ -426,6 +441,9 @@ while running:
                 game_over = True
                 # Stop the music during game over.
                 pygame.mixer.music.stop()
+
+                # Play game over sound
+                game_over_sound.play()
 
                 if is_high_score(score):
                     name_entry = True

@@ -23,10 +23,7 @@ Beta Testing
 - Background music
 - Pause Function
 - High score saving
-
-## Planned Features
-
-- Sound effects
+- Sound Effects
 
 ## Technologies
 
@@ -64,6 +61,7 @@ Beta Testing
 - Added high score saving and posting
 - Music now ends when game ends
 - Scoring/level system adjusted
+- Added sound effects for rotation, line clearing and game over
 - Updated README
 
 ---
